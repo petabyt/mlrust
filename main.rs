@@ -1,13 +1,22 @@
 #![no_std]
 
 extern {
-	fn msleep(ms: u32);
 	fn printf(fmt: *const u8, ...);
+	fn bmp_printf(id: u32, x: u32, y: u32, fmt: *const u8, ...);
+
+	static rFONT_MED: u32;
 }
 
 #[no_mangle]
-pub fn mlrust_task() {
-	unsafe {
-		printf("Hello Rust World\n".as_ptr() as *const u8);
+pub fn main() {
+	loop {
+		unsafe {
+			bmp_printf(
+				rFONT_MED,
+				50,
+				50,
+				"Hello Rust World\n".as_ptr() as *const u8
+			);
+		}
 	}
 }
