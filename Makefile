@@ -1,12 +1,16 @@
 # Install Rustup:
 # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# Install arm
-# rustup target add thumbv6m-none-eabi
+# Install arm v7
+# rustup target add armv7a-none-eabi
 
 _A:=$(shell rustc -C debuginfo=1 \
-		--target thumbv6m-none-eabi --emit asm \
+		--target  thumbv6m-none-eabi --emit asm \
 		-o main.S --crate-type rlib --color=always main.rs)
+
+# Instead of using compiler properly,
+# patch some things with a script
+_B:=$(shell python3 patch.py)
 
 TOP_DIR=../..
 MODULE_NAME=mlrust
