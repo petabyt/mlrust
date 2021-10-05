@@ -1,16 +1,18 @@
-# Install Rustup:
-# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+ifneq ($(MAKECMDGOALS),clean)
 
-# Install arm v7
-# rustup target add armv7a-none-eabi
+_A:=$(shell rustc -C opt-level=2 \
+		--target thumbv6m-none-eabi --emit asm \
+		-o main.S --crate-type rlib --color=always main.rs;)
 
-_A:=$(shell rustc -C debuginfo=1 \
-		--target  thumbv6m-none-eabi --emit asm \
-		-o main.S --crate-type rlib --color=always main.rs)
+ifeq ($(.SHELLSTATUS),1)
+$(error Rust error, quitting)
+endif
 
 # Instead of using compiler properly,
 # patch some things with a script
 _B:=$(shell python3 patch.py)
+
+endif
 
 TOP_DIR=../..
 MODULE_NAME=mlrust

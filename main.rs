@@ -25,7 +25,7 @@ pub fn mlrust_task() {
 				rFONT_MED,
 				x,
 				50,
-				"Hello Rust World\n".as_ptr()
+				"Hello Rust World\n\0\0".as_ptr()
 			);
 		}
 
@@ -35,13 +35,9 @@ pub fn mlrust_task() {
 			x -= 1;
 		}
 
-		if x == 300 || x == 50 {
+		if x == 540 || x == 50 {
 			right = !right;
-		}
-
-		unsafe {
-			msleep(100);
-		}
+		}	
 	}
 }
 
