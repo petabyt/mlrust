@@ -7,13 +7,11 @@
 #include <console.h>
 #include <stdint.h>
 
+unsigned int mlrust_deinit();
+void mlrust_task();
+unsigned int mlrust_init();
+
 uint32_t rFONT_MED = FONT_MED;
-
-void main();
-
-void mlrust_task() {
-	main();
-}
 
 struct menu_entry mlrust_menu[] =
 {
@@ -25,15 +23,8 @@ struct menu_entry mlrust_menu[] =
     },
 };
 
-unsigned int mlrust_init()
-{
-    menu_add("Debug", mlrust_menu, COUNT(mlrust_menu));
-    return 0;
-}
-
-unsigned int mlrust_deinit()
-{
-    return 0;
+void add_menu() {
+	menu_add("Debug", mlrust_menu, COUNT(mlrust_menu));
 }
 
 MODULE_INFO_START()

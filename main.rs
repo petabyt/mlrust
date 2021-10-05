@@ -1,10 +1,10 @@
 #![no_std]
 
-use core::panic::PanicInfo;
-
 extern {
+	fn msleep(ms: u32);
 	fn printf(fmt: *const u8, ...);
 	fn bmp_printf(id: u32, x: u32, y: u32, fmt: *const u8, ...);
+	fn add_menu();
 
 	static rFONT_MED: u32;
 }
@@ -15,12 +15,9 @@ fn panic() {
 	loop {}
 }
 
-const MAX: u32 = 400;
-const MIN: u32 = 50;
-
 #[no_mangle]
-pub fn main() {
-	let mut x = MIN;
+pub fn mlrust_task() {
+	let mut x = 50;
 	let mut right = true;
 	loop {
 		unsafe {
@@ -28,18 +25,36 @@ pub fn main() {
 				rFONT_MED,
 				x,
 				50,
-				"Hello Rust World\n".as_ptr() as *const u8
+				"Hello Rust World\n".as_ptr()
 			);
+		}
 
-			if (right) {
-				x += 1;
-			} else {
-				x -= 1;
-			}
+		if right {
+			x += 1;
+		} else {
+			x -= 1;
+		}
 
-			if (x == MAX || x == MIN) {
-				right = !right;
-			}
+		if x == 300 || x == 50 {
+			right = !right;
+		}
+
+		unsafe {
+			msleep(100);
 		}
 	}
+}
+
+#[no_mangle]
+pub fn mlrust_deinit() -> u32{
+	return 0;
+}
+
+#[no_mangle]
+pub fn mlrust_init() -> u32 {
+	unsafe {
+		add_menu();
+	}
+
+	return 0;
 }
