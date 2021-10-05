@@ -5,8 +5,15 @@
 #include <config.h>
 #include <bmp.h>
 #include <console.h>
+#include <stdint.h>
 
-void mlrust_task();
+uint32_t rFONT_MED = FONT_MED;
+
+void main();
+
+void mlrust_task() {
+	main();
+}
 
 struct menu_entry mlrust_menu[] =
 {
