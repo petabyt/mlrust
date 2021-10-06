@@ -23,6 +23,10 @@ struct menu_entry mlrust_menu[] =
     },
 };
 
+void _msleep(uint32_t ms) {
+	msleep(ms);
+}
+
 void add_menu() {
 	menu_add("Debug", mlrust_menu, COUNT(mlrust_menu));
 }
