@@ -1,4 +1,6 @@
 # Magic Lantern + Rust
+![demo screenshot](https://petabyt.dev/filedump/Screenshot%20at%202021-10-10%2022-26-04.png)
+
 Gets `rustc` to emit arm assembly so we can run it with [Magic Lantern](https://www.magiclantern.fm/).
 
 **TODO:**  
