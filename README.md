@@ -4,6 +4,7 @@
 Gets `rustc` to emit arm assembly so we can run it with [Magic Lantern](https://www.magiclantern.fm/).
 
 **TODO:**  
+- More bindings
 - Logic stress test to make sure code generation is correct
 - Turn it into a Rust module
 
@@ -13,3 +14,5 @@ Gets `rustc` to emit arm assembly so we can run it with [Magic Lantern](https://
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup target add thumbv6m-none-eabi
 ```
+
+Compilation is done with `make rinstall_qemu`.  

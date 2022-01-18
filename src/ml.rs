@@ -9,7 +9,8 @@ pub mod c {
 		pub fn printf(fmt: *const u8, ...);
 		pub fn bmp_printf(id: u32, x: u32, y: u32, fmt: *const u8, ...);
 		pub fn bmp_putpixel(x: u32, y: u32, col: u8);
-		
+
+		// TODO: make this less hacky
 		pub fn add_menu();
 
 		pub static rFONT_MED: u32;

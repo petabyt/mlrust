@@ -1,16 +1,14 @@
-ifneq ($(MAKECMDGOALS),clean)
-    $(info $(shell rustc -C opt-level=2 \
-        --target thumbv6m-none-eabi --emit asm \
-        -o main.S --crate-type rlib --color=always src/main.rs))
+RARCH=thumbv6m-none-eabi
+RFLAGS=-C opt-level=2 --target $(RARCH) --emit asm --crate-type rlib
+main.S: src/main.rs src/ml.rs
+	rustc $(RFLAGS) -o main.S src/main.rs
+	python3 patch.py
 
-    ifeq ($(.SHELLSTATUS),1)
-        $(error Rust error, quitting)
-    endif
+rclean: clean
+	rm -rf *.S
 
-    # Instead of using compiler properly,
-    # patch some things with a script
-    $(info $(shell python3 patch.py))
-endif
+rinstall_qemu: main.S
+	$(MAKE) install_qemu
 
 TOP_DIR=../..
 MODULE_NAME=mlrust
